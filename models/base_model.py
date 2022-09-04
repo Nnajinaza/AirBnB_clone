@@ -33,10 +33,10 @@ class BaseModel():
                 else:
                     self.__dict__[key] = value
 
-
     def __str__(self):
         '''Return details about the class'''
-        return ("[{self.__class__.__name__}] ({}) {}".format(self.id, self.__dict__, self=self))
+        return ("[{self.__class__.__name__}] ({}) {}"
+                .format(self.id, self.__dict__, self=self))
 
     def save(self):
         '''Is used to update the time when the object is changed'''
