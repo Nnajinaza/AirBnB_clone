@@ -13,7 +13,6 @@ class FileStorage():
     __file_path = "file.json"
     __objects = {}
 
-
     def all(self):
         return (FileStorage.__objects)
 
@@ -33,5 +32,5 @@ class FileStorage():
                 new_dict = json.load(new_file)
             for key, value in new_dict.items():
                 self.__objects[key] = eval(value["__class__"])(**value)
-        except:
+        except OSError:
             pass
