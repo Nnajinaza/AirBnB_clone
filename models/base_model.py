@@ -19,12 +19,7 @@ class BaseModel():
 
     def __init__(self, *args, **kwargs):
         '''Initialize the public instance attriibutes'''
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
-        models.storage.new(self)
-
-        if len(kwargs):
+        if (len(kwargs) is not 0):
             for key, value in kwargs.items():
                 date_string = "%Y-%m-%dT%H:%M:%S.%f"
                 if key in ["created_at", "updated_at"]:
@@ -32,6 +27,11 @@ class BaseModel():
 
                 else:
                     self.__dict__[key] = value
+        else:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         '''Return details about the class'''
