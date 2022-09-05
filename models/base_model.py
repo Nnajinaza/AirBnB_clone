@@ -19,7 +19,7 @@ class BaseModel():
 
     def __init__(self, *args, **kwargs):
         '''Initialize the public instance attriibutes'''
-        if (len(kwargs) is not 0):
+        if len(kwargs) != 0:
             for key, value in kwargs.items():
                 date_string = "%Y-%m-%dT%H:%M:%S.%f"
                 if key in ["created_at", "updated_at"]:
