@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 '''A class HBNBCommand which will be used by the command interpreter'''
-
 import cmd
 from models.base_model import BaseModel
 from models import storage
@@ -35,7 +34,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, line):
         '''create: Creates a new instance of BaseModel, saves it
         (JSON file) and prints the id'''
-        if line is None:
+        if (line is None or line == ""):
             print("** class name missing **")
 
         else:
@@ -49,7 +48,7 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, line):
         '''show: Prints the string representation of an instance based
         on the class name and an id'''
-        if line is None:
+        if line is None or line == "":
             print("** class name missing **")
         else:
             new_line = line.split(" ")
@@ -68,7 +67,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, line):
         '''destroy: Deletes an instance based on the class name and id'''
-        if line is None:
+        if line is None or line == "":
             print("** class name missing **")
         else:
             new_line = line.split(" ")
@@ -111,7 +110,7 @@ class HBNBCommand(cmd.Cmd):
         new_line = line.split(" ")
         new_obj = storage.all()
         new_str = "{}.{}".format(new_line[0], new_line[1])
-        if line is None:
+        if line is None or line == "":
             print("** class name is missing **")
         else:
             if new_line[0] in self.class_name:
