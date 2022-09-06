@@ -72,12 +72,11 @@ class HBNBCommand(cmd.Cmd):
         else:
             new_line = line.split(" ")
             if new_line[0] in self.class_name:
-                if len(new_line) < 2:
-                    print("** instance id missing **")
+                if len(new_line) <= 2:
                     new_str = "{}.{}".format(new_line[0], new_line[1])
                     new_obj = storage.all()
                     if new_str in new_obj:
-                        del(new_str)
+                        del(new_obj[new_str])
                         storage.save()
                     else:
                         print("** no instance found **")
@@ -102,20 +101,20 @@ class HBNBCommand(cmd.Cmd):
                     keys = key.split(".")
                     if keys[0] == new_line[0]:
                         new_str.append(str(value))
-                print(new_str)
+            print(new_str)
 
     def do_update(self, line):
         '''update: Update an instance based on the class name
         and id by adding or updating attribute'''
         new_line = line.split(" ")
-        new_obj = storage.all()
-        new_str = "{}.{}".format(new_line[0], new_line[1])
         if line is None or line == "":
             print("** class name is missing **")
         else:
             if new_line[0] in self.class_name:
                 if len(new_line) >= 2:
                     ins_id = new_line[1]
+                    new_obj = storage.all().get(key)
+                    new_str = f"{new_line[0]}.{new_line[1]}"
                     if new_str in new_obj:
                         obj = new_obj[new_str]
                         if len(new_line) >= 3:
