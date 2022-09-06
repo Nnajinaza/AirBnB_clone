@@ -135,6 +135,53 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** class doesn't exist **")
 
+    def do_count(self, line):
+        '''Prints the number of instamces'''
+        count = 0
+        if line:
+            for key, value in storage.all().items():
+                if str(value.__class__.__name__) == line:
+                    count += 1
+        print (count)
+
+    def splinter(self, line):
+        sp = line
+        sp = sp.replace("\"", "")
+        sp = sp.replace("show(", "")
+        sp = sp.replace("destroy(", "")
+        sp = sp.replace("update(", "")
+        sp = sp.replace(")", "")
+        sp = sp.replace(",", "")
+        sp = sp.split()
+        args = ""
+        for i in range(len(sp)):
+            args += sp[i]
+            if i - 1 != range(len(sp)):
+                args += " "
+        return(args)
+
+    def default(self, line):
+        """ Dafault function """
+        new_line = line.split('.')
+        if len(new_line) > 1:
+            if new_line[1] == "count()":
+                self.do_count(new_line[0])
+                if new_line[1] == "all()":
+                    self.do_all(new_line[0])
+                    if new_line[1][:4] == "show":
+                        args = self.splinter(new_line[1])
+                        clas = new_line[0]
+                        self.do_show(clas + " " + args)
+                        if new_line[1][:7] == "destroy":
+                            args = self.splinter(new_line[1])
+                            clas = new_line[0]
+                            self.do_destroy(clas + " " + args)
+                                if new_line[1][:6] == "update":
+                                    args = self.splinter(new_line[1])
+                                    clas = new_line[0]
+                                    self.do_update(clas + " " + args)
+                                else:
+                                    cmd.Cmd.default(self, line)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
