@@ -145,6 +145,7 @@ class HBNBCommand(cmd.Cmd):
         print (count)
 
     def splinter(self, line):
+        '''To split the line'''
         sp = line
         sp = sp.replace("\"", "")
         sp = sp.replace("show(", "")
@@ -176,12 +177,13 @@ class HBNBCommand(cmd.Cmd):
                             args = self.splinter(new_line[1])
                             clas = new_line[0]
                             self.do_destroy(clas + " " + args)
-                                if new_line[1][:6] == "update":
-                                    args = self.splinter(new_line[1])
-                                    clas = new_line[0]
-                                    self.do_update(clas + " " + args)
-                                else:
-                                    cmd.Cmd.default(self, line)
+                            if new_line[1][:6] == "update":
+                                args = self.splinter(new_line[1])
+                                clas = new_line[0]
+                                self.do_update(clas + " " + args)
+                            else:
+                                cmd.Cmd.default(self, line)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
