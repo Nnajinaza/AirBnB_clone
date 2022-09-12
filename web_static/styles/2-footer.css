@@ -1,0 +1,9 @@
+footer {
+	background-color: #00FF00;
+	height: 60;
+	width 100%;
+	position: fixed;
+	display: flex;
+	bottom: 0;
+	vertical-align: middle;
+}
