@@ -167,22 +167,22 @@ class HBNBCommand(cmd.Cmd):
         if len(new_line) > 1:
             if new_line[1] == "count()":
                 self.do_count(new_line[0])
-                if new_line[1] == "all()":
-                    self.do_all(new_line[0])
-                    if new_line[1][:4] == "show":
-                        args = self.splinter(new_line[1])
-                        clas = new_line[0]
-                        self.do_show(clas + " " + args)
-                        if new_line[1][:7] == "destroy":
-                            args = self.splinter(new_line[1])
-                            clas = new_line[0]
-                            self.do_destroy(clas + " " + args)
-                            if new_line[1][:6] == "update":
-                                args = self.splinter(new_line[1])
-                                clas = new_line[0]
-                                self.do_update(clas + " " + args)
-                            else:
-                                cmd.Cmd.default(self, line)
+            if new_line[1] == "all()":
+                self.do_all(new_line[0])
+            if new_line[1][:4] == "show":
+                args = self.splinter(new_line[1])
+                clas = new_line[0]
+                self.do_show(clas + " " + args)
+            if new_line[1][:7] == "destroy":
+                args = self.splinter(new_line[1])
+                clas = new_line[0]
+                self.do_destroy(clas + " " + args)
+            if new_line[1][:6] == "update":
+                args = self.splinter(new_line[1])
+                clas = new_line[0]
+                self.do_update(clas + " " + args)
+            else:
+                cmd.Cmd.default(self, line)
 
 
 if __name__ == '__main__':
